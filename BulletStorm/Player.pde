@@ -3,7 +3,13 @@ class Player {
   private int speed = 5;
   private Weapon weapon;
   
+  public Player(){
+    weapon = new Weapon();
+  }
   
+  public void updateHealth(){
+    
+  }
   
   
 }

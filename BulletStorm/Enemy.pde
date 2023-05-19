@@ -11,5 +11,7 @@ class Enemy {
 }
 
 class Octopus extends Enemy {
-  
+  public Octopus(int h, int a, int s){
+    super(h, a, s);
+  }
 }
