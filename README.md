@@ -1,4 +1,5 @@
 # Final_Project
+<<<<<<< HEAD
 
 # a
 
@@ -7,3 +8,9 @@
 # a
 
 # PLEASE WORK PLEASE COMMIT TO JBRANCH
+=======
+
+# a
+
+# PLEASE WORK PLEASE COMMIT TO JBRANCH
+>>>>>>> jbranch

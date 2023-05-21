@@ -16,6 +16,13 @@ class Player {
   float groundLevel;
   int timer;
   
+  //Player stats
+  float health;
+  float attack;
+  float speed;
+  
+  
+  color c = color(255,0, 0);
   Player(float x, float y, float size) {
     this.x = x;
     this.y = y;
@@ -24,6 +31,9 @@ class Player {
     vy = 0;
     isJumping = false;
     isFalling = false;
+    speed = 5;
+    health = 100;
+    attack = 10;
     timer = 5;
     jumpForce = -10; // Adjust this value to control the jump height
     fallForce = 0.5; // Adjust this value to control the fall speed
@@ -31,16 +41,25 @@ class Player {
   }
   
   void update() {
+    if (player.health <= 0) {
+      c = color(0,0,0);
+    }
     // Update player position based on velocity
+    if (x - size/2 + vx < -1) {
+      x = size/2;
+    }
+    else if (x+size/2 + vx > width) {
+      x = width-size/2;
+    }
+    else {
     x += vx;
     y += vy;
+    }
     if (isJumping) {
       timer--;
-      System.out.println(timer);
     }
     // Apply gravity
     if (timer<1) {
-      System.out.println("hiiiii");
       vy += fallForce; // Adjust this value to control the fall speed
     }
     
@@ -56,17 +75,18 @@ class Player {
     }
     
     // Display the player
-    fill(255, 0, 0);
+    fill(c);
     rectMode(CENTER);
     rect(x, y, size, size);
   }
   
   void moveLeft() {
-    vx = -5; // Adjust this value to control the left movement speed
+      vx = -speed; // Adjust this value to control the left movement speed
+
   }
   
   void moveRight() {
-    vx = 5; // Adjust this value to control the right movement speed
+      vx = speed; // Adjust this value to control the right movement speed
   }
   
   void stopMoving() {

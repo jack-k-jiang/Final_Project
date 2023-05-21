@@ -6,4 +6,5 @@ class Weapon {
     name = "Default";
     attack = 5;
   }
+
 }

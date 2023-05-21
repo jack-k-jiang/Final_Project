@@ -1,0 +1,15 @@
+class Bullet {
+  private float x, y;
+  private float spd;
+  
+  public Bullet(){
+    x = player.x;
+    y = player.y;
+    spd = 1;
+  }
+
+  public void update(){
+    x += mouseX * spd;
+    y += mouseY * spd;
+  }
+}
