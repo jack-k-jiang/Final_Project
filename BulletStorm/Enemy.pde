@@ -36,8 +36,14 @@ class Octopus extends Enemy {
       player.health-=attack;
       c = #2596BE;
     }
-    System.out.println(player.x);
-    System.out.println(x);
+    
+    for (int i = 0;i < bullets.size();i++) {
+      Bullet bullet = bullets.get(i);
+      if (bullet.pos.x == x && bullet.pos.y == y) {
+         health-=player.attack;
+      }
+    }
+    
     fill(c);
     circle(x,y,50);
   }

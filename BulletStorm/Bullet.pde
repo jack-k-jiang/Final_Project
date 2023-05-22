@@ -3,7 +3,7 @@ class Bullet {
   PVector mouse; 
   float spd;
   float angle;
-
+  
   public Bullet(){
     pos = new PVector(player.x, player.y);
     mouse = new PVector(mouseX, mouseY);

@@ -1,27 +1,35 @@
-ArrayList<PVector> character = new ArrayList<PVector>();
 PVector powerUp;
 Player player;
 Weapon weapon;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-
+//Timer for functions
+int startTime;
+boolean reload = false;
 Octopus Greg;
 
 void setup() {
   background(173, 216, 230);
   size(1250,750);
+  startTime = second();
   player = new Player(width/2, height - 25, 50);
   Greg = new Octopus(width/4, height - 25, 100, 10, 4);
 }
 
 void draw() {
+  int currentTime = millis();
+  
+  if (currentTime%500 == 0) {
+    reload = true;
+  }
   background(173, 216, 230);
   // Update and display the player
   player.update();
   //Update and display the enemy
   Greg.update();
   // Shoot weapon
-  if (mousePressed && mouseButton == LEFT){
+  if (mousePressed && mouseButton == LEFT && reload){
     bullets.add(new Bullet());
+    reload = false;
   }
   for (int i = bullets.size() - 1; i >= 0 ; i--) {
     Bullet bullet = bullets.get(i);
