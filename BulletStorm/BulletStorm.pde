@@ -1,19 +1,21 @@
-ArrayList<PVector> character = new ArrayList<PVector>();
 PVector powerUp;
 Player player;
 Weapon weapon;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-
+//Timer for functions
+int startTime;
 Octopus Greg;
 
 void setup() {
   background(173, 216, 230);
   size(1250,750);
+  startTime = second();
   player = new Player(width/2, height - 25, 50);
   Greg = new Octopus(width/4, height - 25, 100, 10, 4);
 }
 
 void draw() {
+  
   background(173, 216, 230);
   // Update and display the player
   player.update();
