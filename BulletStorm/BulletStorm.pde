@@ -8,8 +8,9 @@ Octopus Greg;
 int reloadRate = 0;
 
 void setup() {
-
   background(173, 216, 230);
+  PImage img = loadImage("octopus.jpg");
+
   size(1250,750);
   player = new Player(width/2, height - 25, 50);
   Greg = new Octopus(width/4, height - 25, 100, 10, 4);
