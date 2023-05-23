@@ -4,7 +4,6 @@ Weapon weapon;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 //Timer for functions
 int startTime;
-boolean reload = false;
 Octopus Greg;
 
 void setup() {
@@ -16,20 +15,15 @@ void setup() {
 }
 
 void draw() {
-  int currentTime = millis();
   
-  if (currentTime%500 == 0) {
-    reload = true;
-  }
   background(173, 216, 230);
   // Update and display the player
   player.update();
   //Update and display the enemy
   Greg.update();
   // Shoot weapon
-  if (mousePressed && mouseButton == LEFT && reload){
+  if (mousePressed && mouseButton == LEFT){
     bullets.add(new Bullet());
-    reload = false;
   }
   for (int i = bullets.size() - 1; i >= 0 ; i--) {
     Bullet bullet = bullets.get(i);
