@@ -17,13 +17,13 @@ void setup() {
 
 void draw() {
   background(173, 216, 230);
-  counter++;
+  reloadRate++;
   // Update and display the player
   player.update();
   //Update and display the enemy
   Greg.update();
   // Shoot weapon
-  if (mousePressed && mouseButton == LEFT && reloadRate >= 120){
+  if (mousePressed && mouseButton == LEFT && reloadRate >= 20){
     reloadRate = 0;
     bullets.add(new Bullet());
   }
