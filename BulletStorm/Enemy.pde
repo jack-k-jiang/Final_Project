@@ -20,10 +20,12 @@ class Enemy {
 }
 
 class Octopus extends Enemy {
+  img = loadImage("dog.jpg");
   image(img, 5, 5);
   public Octopus(float x, float y, int h, int a, int s){
     super(x, y, h, a, s);
   }
+  
   
   void update() {
     System.out.println("health: "+health);
