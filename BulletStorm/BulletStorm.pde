@@ -13,7 +13,7 @@ void setup() {
 
   size(1250,750);
   player = new Player(width/2, height - 25, 50);
-  Greg = new Octopus(width/4, height - 25, 100, 10, 4);
+  Greg = new Octopus(width/4, height - 95, 100, 10, 4, 95, 95);
 }
 
 void draw() {
