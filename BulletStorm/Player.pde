@@ -21,6 +21,8 @@ class Player {
   float attack;
   float speed;
   
+  
+  color c = color(255,0, 0);
   Player(float x, float y, float size) {
     this.x = x;
     this.y = y;
@@ -33,16 +35,26 @@ class Player {
     health = 100;
     attack = 10;
     timer = 5;
-    jumpForce = -15; // Adjust this value to control the jump height
+    jumpForce = -10; // Adjust this value to control the jump height
     fallForce = 0.5; // Adjust this value to control the fall speed
     groundLevel = height - size / 2;
   }
   
   void update() {
+    if (player.health <= 0) {
+      c = color(0,0,0);
+    }
     // Update player position based on velocity
-   
+    if (x - size/2 + vx < -1) {
+      x = size/2;
+    }
+    else if (x+size/2 + vx > width) {
+      x = width-size/2;
+    }
+    else {
     x += vx;
     y += vy;
+    }
     if (isJumping) {
       timer--;
     }
@@ -63,27 +75,18 @@ class Player {
     }
     
     // Display the player
-    fill(255, 0, 0);
+    fill(c);
     rectMode(CENTER);
     rect(x, y, size, size);
   }
   
   void moveLeft() {
-    if (player.x >= player.size/2 + speed) {
       vx = -speed; // Adjust this value to control the left movement speed
-    }
-    else {
-      vx = 0;
-    }
+
   }
   
   void moveRight() {
-    if (player.x <= width - player.size/2 - speed) {
       vx = speed; // Adjust this value to control the right movement speed
-    }
-    else {
-      vx = 0;
-    }
   }
   
   void stopMoving() {
