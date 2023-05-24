@@ -8,6 +8,12 @@ int reloadRate = 0;
 boolean start = true;
 
 void setup() {
+<<<<<<< HEAD
+=======
+  background(173, 216, 230);
+  PImage img = loadImage("octopus.jpg");
+
+>>>>>>> b681913de9d02db5cbbb93fde0bdab10b01ea4cd
   size(1250,750);
   startScreen();
 }

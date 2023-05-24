@@ -5,6 +5,7 @@ class Enemy {
   float x,y;
   int size = 50;
   color c = color(255,0,0);
+  PImage img;
    
    PVector vx;
    PVector vy;
@@ -19,11 +20,16 @@ class Enemy {
 }
 
 class Octopus extends Enemy {
+  img = loadImage("dog.jpg");
+  image(img, 5, 5);
   public Octopus(float x, float y, int h, int a, int s){
     super(x, y, h, a, s);
   }
   
+  
   void update() {
+    System.out.println("health: "+health);
+    if (health<=0) c = color(0,0,0);
     if (player.x + player.size/2 < x - size/2) {
       x -= speed;
     }
@@ -32,14 +38,13 @@ class Octopus extends Enemy {
       x += speed;
     }
     
-    else if (abs((player.x - player.size/2) - (x + size / 2)) <= 25 || abs((player.x + player.size/2) - (x - size / 2)) <= 25) { 
+    else if (abs((player.x - player.size/2) - (x + size / 2)) <= 25 || abs((player.x + player.size/2) - (x - size / 2)) <= 39.15) { 
       player.health-=attack;
-      c = #2596BE;
     }
     
     for (int i = 0;i < bullets.size();i++) {
       Bullet bullet = bullets.get(i);
-      if (bullet.pos.x == x && bullet.pos.y == y) {
+      if () {
          health-=player.attack;
       }
     }
