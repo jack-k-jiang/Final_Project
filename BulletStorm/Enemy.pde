@@ -20,8 +20,6 @@ class Enemy {
 }
 
 class Octopus extends Enemy {
-  img = loadImage("dog.jpg");
-  image(img, 5, 5);
   public Octopus(float x, float y, int h, int a, int s){
     super(x, y, h, a, s);
   }
@@ -42,12 +40,7 @@ class Octopus extends Enemy {
       player.health-=attack;
     }
     
-    for (int i = 0;i < bullets.size();i++) {
-      Bullet bullet = bullets.get(i);
-      if () {
-         health-=player.attack;
-      }
-    }
+
     
     fill(c);
     circle(x,y,50);

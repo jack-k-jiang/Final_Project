@@ -8,18 +8,12 @@ int reloadRate = 0;
 boolean start = true;
 
 void setup() {
-<<<<<<< HEAD
-=======
-  background(173, 216, 230);
-  PImage img = loadImage("octopus.jpg");
-
->>>>>>> b681913de9d02db5cbbb93fde0bdab10b01ea4cd
   size(1250,750);
   startScreen();
 }
 
 void draw() {
-  if (mousePressed && mouseButton == LEFT && start == true){
+  if (mousePressed && mouseButton == LEFT && start == true && end == false){
      background(173, 216, 230);
      player = new Player(width/2, height - 25, 50);
      Greg = new Octopus(width/4, height - 25, 100, 10, 4);
@@ -43,6 +37,16 @@ void draw() {
     if (bullet.pos.x < 0 || bullet.pos.x > width || bullet.pos.y < 0 || bullet.pos.y > height){
         bullets.remove(i);
     }
+  }
+  if (player.health <= 0){
+    start = true;
+    player.health = 100;
+    background(173, 216, 230);
+    textSize(100);
+    fill(173,216,230);
+    text("GAME OVER", width/2-250, height/2);
+    strokeWeight(1);
+    startScreen();
   }
   }
 }
