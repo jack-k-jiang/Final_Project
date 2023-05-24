@@ -25,6 +25,7 @@ class Enemy {
       bullet.pos.x <= enemy.x + enemy.eWidth &&    // r1 left edge past r2 right
       bullet.pos.y + bullet.bHeight >= enemy.y &&    // r1 top edge past r2 bottom
       bullet.pos.y <= enemy.y + enemy.eHeight) {    // r1 bottom edge past r2 top
+        bullet.firstTouch = false;
         return true;
   }
   return false;
@@ -41,10 +42,11 @@ class Octopus extends Enemy {
   
   
   void update() {
+    if (health>0) {
       PImage img = loadImage("octopus.png");
       image(img, x,y, eWidth, eHeight);
-    System.out.println("health: "+health);
-    if (health<=0) c = color(0,0,0);
+    }
+
     if (player.x + player.size/2 < x - size/2) {
       x -= speed;
     }
@@ -59,7 +61,7 @@ class Octopus extends Enemy {
     
     for (int i = 0;i < bullets.size();i++) {
       Bullet bullet = bullets.get(i);
-      if (touching(bullet, this)) {
+      if (bullet.firstTouch && touching(bullet, this)) {
          health-=player.attack;
       }
     }

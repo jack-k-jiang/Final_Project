@@ -5,6 +5,7 @@ class Bullet {
   float angle;
   float bWidth;
   float bHeight;
+  boolean firstTouch;
   
   public Bullet(){
     pos = new PVector(player.x, player.y);
@@ -13,6 +14,7 @@ class Bullet {
     angle = atan2(mouse.y - pos.y, mouse.x - pos.x) / PI * 180;
     bWidth = 10;
     bHeight = 10;
+    firstTouch = true;
   }
 
   public void update(){
