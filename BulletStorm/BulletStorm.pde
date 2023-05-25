@@ -4,6 +4,7 @@ Weapon weapon;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 //Timer for functions
 Octopus Greg;
+Octopus Eric;
 int reloadRate = 0;
 boolean start = true;
 
@@ -17,7 +18,8 @@ void setup() {
 void draw() {
   if (mousePressed && mouseButton == LEFT && start == true){
     player = new Player(width/2, height - 25, 50);
-    Greg = new Octopus(width/4, height - 95, 100, 10, 4, 95, 95);
+    Greg = new Octopus(width/4, height - 95, 50, 10, 4, 95, 95);
+    Eric = new Octopus(width/1.5, height - 95, 50, 10, 4, 95, 95);
     start = false;
     background(255,255,255);
   }
@@ -28,8 +30,9 @@ void draw() {
   player.update();
   //Update and display the enemy
   Greg.update();
+  Eric.update();
   // Shoot weapon
-  if (mousePressed && mouseButton == LEFT && reloadRate >= 20 && player != null){
+  if (mousePressed && mouseButton == LEFT && reloadRate >= 10 && player != null){
     reloadRate = 0;
     bullets.add(new Bullet());
   }
