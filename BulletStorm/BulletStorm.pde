@@ -8,19 +8,21 @@ int reloadRate = 0;
 boolean start = true;
 
 void setup() {
-  size(1250,750);
+  background(255,255,255);
+  size(1224, 734);
+  
   startScreen();
 }
 
 void draw() {
-  if (mousePressed && mouseButton == LEFT && start == true && end == false){
-     background(173, 216, 230);
-     player = new Player(width/2, height - 25, 50);
-     Greg = new Octopus(width/4, height - 25, 100, 10, 4);
-     start = false;
+  if (mousePressed && mouseButton == LEFT && start == true){
+    player = new Player(width/2, height - 25, 50);
+    Greg = new Octopus(width/4, height - 95, 100, 10, 4, 95, 95);
+    start = false;
+    background(255,255,255);
   }
   if (start == false){
-  background(173, 216, 230);
+      background(255,255,255);
   reloadRate++;
   // Update and display the player
   player.update();
@@ -38,15 +40,9 @@ void draw() {
         bullets.remove(i);
     }
   }
-  if (player.health <= 0){
+  if (player.health == 0){
+    endScreen();
     start = true;
-    player.health = 100;
-    background(173, 216, 230);
-    textSize(100);
-    fill(173,216,230);
-    text("GAME OVER", width/2-250, height/2);
-    strokeWeight(1);
-    startScreen();
   }
   }
 }
@@ -68,13 +64,21 @@ void keyReleased() {
 }
 
 void startScreen(){
-  background(173, 216, 230);
+  background(255,255,255);
   textSize(100);
-  fill(173,216,230);
-  stroke(0,0,0);
-  strokeWeight(4);
-  rect(width/2-100,height/2 - 80,215,100);
   fill(0,0,0);
-  text("PLAY", width/2-100, height/2);
+  textAlign(CENTER);
+  text("PLAY", width/2, height/2);
+  strokeWeight(1);
+}
+
+void endScreen(){
+  background(255,255,255);
+  textSize(100);
+  fill(0,0,0);
+  textAlign(CENTER);
+  text("GAME OVER", width/2, height/2);
+  textSize(50);
+  text("PRESS ANYWHERE TO PLAY AGAIN", width/2, height/2 + 100);
   strokeWeight(1);
 }
