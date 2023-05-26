@@ -58,7 +58,7 @@ class Octopus extends Enemy {
     attackRate++;
     
 
-    if (player.x + player.size/2 < x) {
+    if (player.x + player.size < x) {
       x -= speed;
     }
     
@@ -69,6 +69,9 @@ class Octopus extends Enemy {
     if (health>0) {
       PImage img = loadImage("octopus.png");
       image(img, x,y, eWidth, eHeight);
+    }
+    if (health<=0) {
+      this = null;
     }
     
     if (attackRate >= 30 && health > 0 && (isTouching(player, this))) { 

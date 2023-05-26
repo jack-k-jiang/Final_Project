@@ -18,7 +18,7 @@ void setup() {
 void draw() {
   if (mousePressed && mouseButton == LEFT && start == true){
     player = new Player(width/2, height - 50, 50);
-    Greg = new Octopus(width/4, height - 95, 50, 10, 4, 95, 95);
+    Greg = new Octopus(width/2, height - 95, 50, 10, 4, 95, 95);
      Eric = new Octopus(width/4, height - 95, 50, 10, 4, 95, 95);
     start = false;
     background(255,255,255);
@@ -29,7 +29,7 @@ void draw() {
   // Update and display the player
   player.update();
   //Update and display the enemy
-  //Greg.update();
+  Greg.update();
   Eric.update();
   // Shoot weapon
   if (mousePressed && mouseButton == LEFT && reloadRate >= 10 && player != null){
