@@ -2,7 +2,6 @@ PVector powerUp;
 Player player;
 Weapon weapon;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-//Timer for functions
 Octopus Greg;
 Octopus Eric;
 int reloadRate = 0;
@@ -11,7 +10,6 @@ boolean start = true;
 void setup() {
   background(255,255,255);
   size(1224, 734);
-  
   startScreen();
 }
 
@@ -34,7 +32,7 @@ void draw() {
   // Shoot weapon
   if (mousePressed && mouseButton == LEFT && reloadRate >= 1 && player != null){
     reloadRate = 0;
-    bullets.add(new Bullet());
+    bullets.add(new Bullet(player.x, player.y, mouseX, mouseY));
   }
   for (int i = bullets.size() - 1; i >= 0 ; i--) {
     Bullet bullet = bullets.get(i);

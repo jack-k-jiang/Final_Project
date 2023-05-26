@@ -10,6 +10,7 @@ class Enemy {
    float eWidth;
    float eHeight;
    float attackRate;
+   ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
    
   Enemy(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
     this.x = x;
@@ -43,8 +44,6 @@ class Enemy {
   }
   return false;
   }
-  
-  
 }
 
 class Octopus extends Enemy {
