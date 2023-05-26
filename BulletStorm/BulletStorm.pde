@@ -32,11 +32,7 @@ void draw() {
   Greg.update();
   Eric.update();
   // Shoot weapon
-<<<<<<< HEAD
   if (mousePressed && mouseButton == LEFT && reloadRate >= 1 && player != null){
-=======
-  if (mousePressed && mouseButton == LEFT && reloadRate >= 10 && player != null){
->>>>>>> origin/main
     reloadRate = 0;
     bullets.add(new Bullet());
   }
