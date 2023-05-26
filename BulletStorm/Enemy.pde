@@ -46,7 +46,7 @@ class Octopus extends Enemy {
       PImage img = loadImage("octopus.png");
       image(img, x,y, eWidth, eHeight);
     }
-
+ 
     if (player.x + player.size/2 < x - size/2) {
       x -= speed;
     }
@@ -55,7 +55,7 @@ class Octopus extends Enemy {
       x += speed;
     }
     
-    else if (abs((player.x - player.size/2) - (x + size / 2)) <= 25 || abs((player.x + player.size/2) - (x - size / 2)) <= 39.15) { 
+    else if (health > 0 && (abs((player.x - player.size/2) - (x + size / 2)) <= 25 || abs((player.x + player.size/2) - (x - size / 2)) <= 39.15)) { 
       player.health-=attack;
     }
     

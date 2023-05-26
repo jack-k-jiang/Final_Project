@@ -29,7 +29,7 @@ void draw() {
   //Update and display the enemy
   Greg.update();
   // Shoot weapon
-  if (mousePressed && mouseButton == LEFT && reloadRate >= 20 && player != null){
+  if (mousePressed && mouseButton == LEFT && reloadRate >= 1 && player != null){
     reloadRate = 0;
     bullets.add(new Bullet());
   }
@@ -43,6 +43,9 @@ void draw() {
   if (player.health == 0){
     endScreen();
     start = true;
+    for(int i = 0; i < bullets.size(); i++){
+      bullets.remove(i);
+    }
   }
   }
 }
