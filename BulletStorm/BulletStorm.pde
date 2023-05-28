@@ -7,10 +7,12 @@ Octopus Greg;
 Octopus Eric;
 int reloadRate = 0;
 boolean start = true;
+PImage background;
 
 void setup() {
   background(255,255,255);
-  size(1224, 734);
+  background = loadImage("background1.gif");
+  size(1200, 800);
   
   startScreen();
 }
@@ -24,7 +26,7 @@ void draw() {
     background(255,255,255);
   }
   if (start == false){
-      background(255,255,255);
+      background(background);
   reloadRate++;
   // Update and display the player
   player.update();
