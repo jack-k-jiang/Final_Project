@@ -35,9 +35,9 @@ class Player {
     health = 100;
     attack = 10;
     timer = 5;
-    jumpForce = -10; // Adjust this value to control the jump height
+    jumpForce = -20; // Adjust this value to control the jump height
     fallForce = 0.5; // Adjust this value to control the fall speed
-    groundLevel = height - size / 2;
+    groundLevel = height - size;
   }
   
   void update() {
@@ -45,16 +45,16 @@ class Player {
       c = color(0,0,0);
     }
     // Update player position based on velocity
-    if (x - size/2 + vx < -1) {
-      x = size/2;
+    if (x + vx < -1) {
+      x = 0;
     }
-    else if (x+size/2 + vx > width) {
-      x = width-size/2;
+    else if (x+size + vx > width) {
+      x = width-size;
     }
     else {
     x += vx;
-    y += vy;
     }
+    y += vy;
     if (isJumping) {
       timer--;
     }
@@ -76,8 +76,8 @@ class Player {
     
     // Display the player
     fill(c);
-    rectMode(CENTER);
-    rect(x, y, size, size);
+    rect(x, y, 50, 50);
+    
   }
   
   void moveLeft() {
