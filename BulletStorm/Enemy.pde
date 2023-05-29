@@ -47,31 +47,33 @@ class Enemy {
 }
 
 class Octopus extends Enemy {
-
+  PImage img = loadImage("left-octopus.png");
+  PImage img1 = loadImage("right-octopus.png");
+  PImage temp = img;
   public Octopus(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
     super(x, y, h, a, s, eWidth, eHeight);
       }
   
   
   void update() {
+    if (health>0) {
     attackRate++;
     
 
     if (player.x + player.size < x) {
+      temp = img;
       x -= speed;
     }
     
     else if (player.x > x + eWidth) {
+      temp = img1;
       x += speed;
     }
     
     if (health>0) {
-      PImage img = loadImage("octopus.png");
-      image(img, x,y, eWidth, eHeight);
+      image(temp, x,y, eWidth, eHeight);
     }
-     if (health<=0) {
-      this = null;
-    }
+ 
     
     if (attackRate >= 30 && health > 0 && (isTouching(player, this))) { 
       attackRate = 0;
@@ -87,6 +89,7 @@ class Octopus extends Enemy {
     }
     
   
+    }
   }
   }
   

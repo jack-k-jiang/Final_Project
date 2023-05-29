@@ -81,6 +81,7 @@ class Player {
   }
   
   void moveLeft() {
+      
       vx = -speed; // Adjust this value to control the left movement speed
 
   }
