@@ -15,9 +15,9 @@ void setup() {
 
 void draw() {
   if (mousePressed && mouseButton == LEFT && start == true){
-    player = new Player(width/2, height - 25, 50);
-    Greg = new Octopus(width/4, height - 95, 50, 10, 4, 95, 95);
-    Eric = new Octopus(width/1.5, height - 95, 50, 10, 4, 95, 95);
+    player = new Player(width/2, height - 50, 50);
+    Greg = new Octopus(width/2, height - 95, 50, 10, 4, 95, 95);
+     Eric = new Octopus(width/4, height - 95, 50, 10, 4, 95, 95);
     start = false;
     background(255,255,255);
   }

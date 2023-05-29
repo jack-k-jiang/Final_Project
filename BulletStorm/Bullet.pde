@@ -16,10 +16,12 @@ class Bullet {
   }
 
   public void update(){
+    if (firstTouch) {
     pos.x += cos(angle/180*PI)*spd;
     pos.y += sin(angle/180*PI)*spd;
     fill(0,0,255);
     rect(pos.x, pos.y, bWidth, bHeight);
+    }
   }
 }
 

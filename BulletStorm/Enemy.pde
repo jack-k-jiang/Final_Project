@@ -55,20 +55,25 @@ class Octopus extends Enemy {
   
   void update() {
     attackRate++;
+    
+
+    if (player.x + player.size < x) {
+      x -= speed;
+    }
+    
+    else if (player.x > x + eWidth) {
+      x += speed;
+    }
+    
     if (health>0) {
       PImage img = loadImage("octopus.png");
       image(img, x,y, eWidth, eHeight);
     }
- 
-    if (player.x + player.size/2 < x - size/2) {
-      x -= speed;
+     if (health<=0) {
+      this = null;
     }
     
-    else if (player.x - player.size/2 > x + size/2) {
-      x += speed;
-    }
-    
-    else if (attackRate >= 30 && health > 0 && (isTouching(player, this))) { 
+    if (attackRate >= 30 && health > 0 && (isTouching(player, this))) { 
       attackRate = 0;
       player.health-=attack;
       System.out.println("player health: "+player.health);
@@ -84,5 +89,4 @@ class Octopus extends Enemy {
   
   }
   }
-  
   
