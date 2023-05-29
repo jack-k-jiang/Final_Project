@@ -32,7 +32,7 @@ class Player {
     isJumping = false;
     isFalling = false;
     speed = 5;
-    health = 1000;
+    health = 100;
     attack = 10;
     timer = 5;
     jumpForce = -10; // Adjust this value to control the jump height

@@ -31,13 +31,13 @@ class enemyBullet extends Bullet{
   public enemyBullet(Enemy enemy){
     pos = new PVector(enemy.x,enemy.y);
     bWidth = 10;
-    bHeight = 10;
+    bHeight = 1000;
     firstTouch = true;
   }
 
-  public void update(){
-    pos.x += 0;
-    pos.y += 10 * spd;
+  public void update(Enemy enemy){
+    pos.x += enemy.speed;
+    pos.y += 0;
     fill(100,0,0);
     rect(pos.x + 50, pos.y, bWidth, bHeight);
   }

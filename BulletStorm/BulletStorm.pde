@@ -4,8 +4,8 @@ Player player;
 Weapon weapon;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 //Timer for functions
-Octopus Greg;
-Octopus Eric;
+Alien Greg;
+Alien Eric;
 Airship Jack;
 static int reloadRate = 0;
 boolean start = true;
@@ -24,8 +24,8 @@ void draw() {
   if (curLvl.lvl == 1) {
   if (mousePressed && mouseButton == LEFT && start == true){
     player = new Player(width/2, height - 50, 50);
-    Greg = new Octopus(width/2, height - 95, 50, 10, 4, 95, 95);
-    Eric = new Octopus(width/4, height - 95, 50, 10, 4, 95, 95);
+    Greg = new Alien(width/2, height - 95, 50, 10, 4, 95, 95);
+    Eric = new Alien(width/4, height - 95, 50, 10, 4, 95, 95);
     Jack = new Airship(width/4, 0, 50, 10, 4, 95, 95);
     start = false;
     background(255,255,255);
