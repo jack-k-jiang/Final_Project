@@ -32,10 +32,10 @@ class Player {
     isJumping = false;
     isFalling = false;
     speed = 5;
-    health = 100;
+    health = 1000;
     attack = 10;
     timer = 5;
-    jumpForce = -20; // Adjust this value to control the jump height
+    jumpForce = -10; // Adjust this value to control the jump height
     fallForce = 0.5; // Adjust this value to control the fall speed
     groundLevel = height - size;
   }

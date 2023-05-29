@@ -21,8 +21,24 @@ class Bullet {
     if (firstTouch) {
     pos.x += cos(angle/180*PI)*spd;
     pos.y += sin(angle/180*PI)*spd;
-    fill(0,0,255);
-    rect(pos.x, pos.y, bWidth, bHeight);
+    fill(0,255,0);
+    rect(pos.x + 25, pos.y, bWidth, bHeight);
     }
+  }
+}
+
+class enemyBullet extends Bullet{
+  public enemyBullet(Enemy enemy){
+    pos = new PVector(enemy.x,enemy.y);
+    bWidth = 10;
+    bHeight = 10;
+    firstTouch = true;
+  }
+
+  public void update(){
+    pos.x += 0;
+    pos.y += 10 * spd;
+    fill(100,0,0);
+    rect(pos.x + 50, pos.y, bWidth, bHeight);
   }
 }

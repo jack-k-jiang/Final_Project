@@ -5,11 +5,12 @@ class Enemy {
   int size = 50;
   color c = color(255,0,0);   
   float x,y;
-   PVector vx;
-   PVector vy;
-   float eWidth;
-   float eHeight;
-   float attackRate;
+  int vx;
+  int vy;
+  float eWidth;
+  float eHeight;
+  float attackRate;
+  ArrayList<enemyBullet> bullets = new ArrayList<enemyBullet>();
    
   Enemy(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
     this.x = x;
@@ -92,5 +93,48 @@ class Octopus extends Enemy {
   
     }
   }
+  }
+
+  class Airship extends Enemy {
+    PImage img = loadImage("left-airship.png");
+    PImage img1 = loadImage("right-airship.png");
+    PImage temp = img1;
+      public Airship(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
+          super(x, y, h, a, s, eWidth, eHeight);
+      }
+
+      void update() {
+        if (health>0) {
+          if (x+eWidth+speed > width) {
+            x = width-eWidth;
+            speed = -1 * speed;
+            temp = img;
+          }
+
+          else if (x + vx < -1) {
+            speed = -1 * speed;
+            x  = 0;
+            temp = img1;
+          }
+          else {
+          image(temp, x, y, eWidth, eHeight);
+          x+=speed;
+          }
+
+        bullets.add(new enemyBullet(this));
+        }
+        for (int i = bullets.size() - 1; i >= 0 ; i--) {
+          enemyBullet bullet = bullets.get(i);
+          bullet.update();
+          if (bullet.pos.x < 0 || bullet.pos.x > width || bullet.pos.y < 0 || bullet.pos.y > height){
+            bullets.remove(i);
+          }
+
+        }
+
+
+      }
+
+
   }
   
