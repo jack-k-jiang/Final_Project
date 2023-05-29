@@ -76,8 +76,6 @@ class Player {
     
     // Display the player
     fill(c);
-    System.out.println("x: "+x);
-    System.out.println("y: "+y);
     rect(x, y, 50, 50);
     
   }
