@@ -6,7 +6,7 @@ ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 //Timer for functions
 Alien Greg;
 Alien Eric;
-Airship Jack;
+UFO Jack;
 static int reloadRate = 0;
 boolean start = true;
 PImage background;
@@ -26,7 +26,7 @@ void draw() {
     player = new Player(width/2, height - 50, 50);
     Greg = new Alien(width/2, height - 95, 50, 10, 4, 95, 95);
     Eric = new Alien(width/4, height - 95, 50, 10, 4, 95, 95);
-    Jack = new Airship(width/4, 0, 50, 10, 4, 95, 95);
+    Jack = new UFO(width/4, 0, 50, 10, 4, 150, 95);
     start = false;
     background(255,255,255);
   }

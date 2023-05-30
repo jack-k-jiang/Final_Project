@@ -28,8 +28,10 @@ class Bullet {
 }
 
 class enemyBullet extends Bullet{
+  
+  
   public enemyBullet(Enemy enemy){
-    pos = new PVector(enemy.x,enemy.y);
+    pos = new PVector(enemy.x,enemy.y+enemy.eHeight);
     bWidth = 10;
     bHeight = 1000;
     firstTouch = true;
@@ -38,7 +40,8 @@ class enemyBullet extends Bullet{
   public void update(Enemy enemy){
     pos.x += enemy.speed;
     pos.y += 0;
-    fill(100,0,0);
-    rect(pos.x + 50, pos.y, bWidth, bHeight);
+      image(enemy.laser,enemy.x+enemy.eWidth/2 - 25,enemy.y+enemy.eHeight,50,height - enemy.eHeight);
+    
+    //rect(pos.x+enemy.eWidth/2, pos.y, bWidth, bHeight);
   }
 }
