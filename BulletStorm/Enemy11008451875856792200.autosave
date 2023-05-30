@@ -10,7 +10,6 @@ class Enemy {
   float eWidth;
   float eHeight;
   float attackRate;
-   ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
    
   Enemy(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
     this.x = x;
@@ -44,6 +43,8 @@ class Enemy {
   }
   return false;
   }
+  
+  
 }
 
 class Alien extends Enemy {
@@ -69,7 +70,7 @@ class Alien extends Enemy {
     if (health>0) {
       image(img, x,y, eWidth, eHeight);
     }
- 
+
     
     if (attackRate >= 30 && health > 0 && (isTouching(player, this))) { 
       attackRate = 0;
@@ -90,7 +91,9 @@ class Alien extends Enemy {
   }
 
   class Airship extends Enemy {
-    PImage img = loadImage("ufo.png");
+    PImage img = loadImage("left-airship.png");
+    PImage img1 = loadImage("right-airship.png");
+    PImage temp = img1;
       public Airship(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
           super(x, y, h, a, s, eWidth, eHeight);
       }
@@ -100,19 +103,21 @@ class Alien extends Enemy {
           if (x+eWidth+speed > width) {
             x = width-eWidth;
             speed = -1 * speed;
+            temp = img;
           }
 
           else if (x + vx < -1) {
             speed = -1 * speed;
             x  = 0;
+            temp = img1;
           }
           else {
-          image(img, x, y, eWidth, eHeight);
+          image(temp, x, y, eWidth, eHeight);
           x+=speed;
           }
 
         enemyBullet bullet = new enemyBullet(this);
-        bullet.update(this);
+        bullet.update();
 
         }
 
