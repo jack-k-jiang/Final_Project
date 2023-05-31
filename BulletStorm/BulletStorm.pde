@@ -7,6 +7,7 @@ ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 Alien Greg;
 Alien Eric;
 UFO Jack;
+HealthBar hb;
 static int reloadRate = 0;
 boolean start = true;
 PImage background;
@@ -24,6 +25,7 @@ void draw() {
   if (curLvl.lvl == 1) {
   if (mousePressed && mouseButton == LEFT && start == true){
     player = new Player(width/2, height - 50, 50);
+    hb = new HealthBar(player);
     Greg = new Alien(width/2, height - 95, 50, 10, 4, 95, 95);
     Eric = new Alien(width/4, height - 95, 50, 10, 4, 95, 95);
     Jack = new UFO(width/4, 0, 50, 10, 4, 150, 95);
@@ -39,6 +41,7 @@ void draw() {
     Greg.update();
     Eric.update();
     Jack.update();
+    hb.update();
     // Shoot weapon
     if (mousePressed && mouseButton == LEFT && reloadRate >= 10 && player != null){
         reloadRate = 0;

@@ -40,7 +40,7 @@ class enemyBullet extends Bullet{
   public void update(Enemy enemy){
     pos.x += enemy.speed;
     pos.y += 0;
-      image(enemy.laser,enemy.x+enemy.eWidth/2 - 25,enemy.y+enemy.eHeight,50,height - enemy.eHeight);
+      image(enemy.laser,enemy.x+enemy.eWidth/2 - 22.5,enemy.y+enemy.eHeight,50,height - enemy.eHeight);
     
     //rect(pos.x+enemy.eWidth/2, pos.y, bWidth, bHeight);
   }
