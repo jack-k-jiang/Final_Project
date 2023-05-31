@@ -3,6 +3,7 @@ PFont arcade;
 Player player;
 Weapon weapon;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+//Timer for functions
 Alien Greg;
 Alien Eric;
 Airship Jack;
@@ -13,13 +14,9 @@ Level curLvl = new Level();
 
 void setup() {
   background(255,255,255);
-<<<<<<< HEAD
-  size(1224, 734);
-=======
   background = loadImage("background1.gif");
   size(1200, 800);
   arcade = createFont("ARCADECLASSIC.TTF",100);
->>>>>>> origin/main
   startScreen();
 }
 
@@ -43,9 +40,9 @@ void draw() {
     Eric.update();
     Jack.update();
     // Shoot weapon
-    if (mousePressed && mouseButton == LEFT && reloadRate >= 1 && player != null){
+    if (mousePressed && mouseButton == LEFT && reloadRate >= 10 && player != null){
         reloadRate = 0;
-        bullets.add(new Bullet(player.x, player.y, mouseX, mouseY));
+        bullets.add(new Bullet());
     }
     for (int i = bullets.size() - 1; i >= 0 ; i--) {
       Bullet bullet = bullets.get(i);
@@ -57,10 +54,7 @@ void draw() {
     if (player.health <= 0){
       endScreen();
       start = true;
-      for(int i = 0; i < bullets.size(); i++){
-      bullets.remove(i);
     }
-  }
   }
   }
 }
