@@ -92,6 +92,7 @@ class Alien extends Enemy {
 
   class UFO extends Enemy {
       float reloadRate = 180;
+      float displayRate = 10;
     PImage img = loadImage("ufo.png");
     PImage laser = loadImage("laser.png");
       public UFO(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
@@ -99,7 +100,7 @@ class Alien extends Enemy {
       }
 
       void update() {
-        reloadRate--;
+        reloadRate++;
         if (health>0) {
           if (x+eWidth+speed > width) {
             x = width-eWidth;
@@ -114,10 +115,14 @@ class Alien extends Enemy {
           image(img, x, y, eWidth, eHeight);
           x+=speed;
           }
-        if (reloadRate > 0) {
-          reloadRate = 10;
+        if (reloadRate >= 180 && displayRate>0) {
+          displayRate--;
           enemyBullet bullet = new enemyBullet(this);
           bullet.update(this);
+        }
+        if (displayRate <= 0) {
+          displayRate = 10;
+          reloadRate = 0;
         }
         }
 
