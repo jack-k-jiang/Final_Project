@@ -3,7 +3,6 @@ class Enemy {
   int attack;
   int speed;
   int size = 50;
-  color c = color(255,0,0);   
   float x,y;
   int vx;
   int vy;
@@ -11,7 +10,7 @@ class Enemy {
   float eHeight;
   float attackRate;
    ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
-   
+  PImage laser = loadImage("laser.png");
   Enemy(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
     this.x = x;
     this.y = y;
@@ -89,13 +88,16 @@ class Alien extends Enemy {
   }
   }
 
-  class Airship extends Enemy {
+  class UFO extends Enemy {
+      float reloadRate = 180;
     PImage img = loadImage("ufo.png");
-      public Airship(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
+    PImage laser = loadImage("laser.png");
+      public UFO(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
           super(x, y, h, a, s, eWidth, eHeight);
       }
 
       void update() {
+        reloadRate--;
         if (health>0) {
           if (x+eWidth+speed > width) {
             x = width-eWidth;
@@ -110,10 +112,11 @@ class Alien extends Enemy {
           image(img, x, y, eWidth, eHeight);
           x+=speed;
           }
-
-        enemyBullet bullet = new enemyBullet(this);
-        bullet.update(this);
-
+        if (reloadRate > 0) {
+          reloadRate = 10;
+          enemyBullet bullet = new enemyBullet(this);
+          bullet.update(this);
+        }
         }
 
 
