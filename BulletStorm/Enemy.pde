@@ -3,7 +3,6 @@ class Enemy {
   int attack;
   int speed;
   int size = 50;
-  color c = color(255,0,0);   
   float x,y;
   int vx;
   int vy;
