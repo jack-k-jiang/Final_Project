@@ -22,7 +22,6 @@ class Player {
   float speed;
   
   
-  color c = color(255,0, 0);
   Player(float x, float y, float size) {
     this.x = x;
     this.y = y;
@@ -42,7 +41,6 @@ class Player {
   
   void update() {
     if (player.health <= 0) {
-      c = color(0,0,0);
     }
     // Update player position based on velocity
     if (x + vx < -1) {
@@ -75,7 +73,7 @@ class Player {
     }
     
     // Display the player
-    fill(c);
+    fill(255,0,0);
     rect(x, y, 50, 50);
     
   }
