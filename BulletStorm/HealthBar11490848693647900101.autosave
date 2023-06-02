@@ -1,7 +1,7 @@
 class HealthBar {
   PImage fullHeart = loadImage("fullHeart.png");
   PImage halfHeart = loadImage("halfHeart.png");
-  PImage emptyHeart = loadImage("emptyHeart.ppg");
+  PImage emptyHeart = loadImage("emptyHeart.png");
   int hearts; 
   HealthBar(Player player) {
      hearts = int(player.health/10);
