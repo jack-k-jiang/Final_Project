@@ -1,17 +1,24 @@
 class HealthBar {
-  PImage healthBar = loadImage("healthbar.png");
-  float healthPoints; 
-  float health;
+  PImage fullHeart = loadImage("fullHeart.jpg");
+  PImage halfHeart = loadImage("halfHeart.jpg");
+  PImage emptyHeart = loadImage("emptyHeart.jpg");
+  int hearts; 
   HealthBar(Player player) {
-     healthPoints = player.health*4;
-     health = player.health;
+     hearts = int(player.health/10);
   }
   
   public void update() {
-    image(healthBar,0,0,healthPoints,75); 
-    fill(#d30100);
-    noStroke();
-    rect(114.4,15.5,health*1.5,66.75);
+      for (int i = 1;i<=10;i++) {
+        if (hearts<i) {
+          image(emptyHeart,50*i+15, 0, 50, 50);
+        }
+        else if (i == hearts && hearts%2==1) {
+            image(halfHeart, 50*i+15,0, 50, 50);
+          }
+        else {
+          image(fullHeart, 50*i+15, 0, 50, 50);
+        }
+      }
   }
   
   
