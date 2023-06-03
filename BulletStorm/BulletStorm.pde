@@ -15,8 +15,8 @@ Level curLvl = new Level();
 
 void setup() {
   background(255,255,255);
-  background = loadImage("spaceBackground.avif");
-  size(1200, 800);
+  background = loadImage("spaceBackground.jpg");
+  size(1300, 800);
   arcade = createFont("ARCADECLASSIC.TTF",100);
   startScreen();
 }
