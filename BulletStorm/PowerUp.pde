@@ -8,19 +8,23 @@ class PowerUp{
     boolean buffed = false;
     
     PowerUp(){
-       powerUp = new PVector(int(random(width/2)),int(random(height/2))); 
+       powerUp = new PVector(int(random(width/2)),height-50); 
        pWidth = 50;
        pHeight = 50;
     }
 
     void update(){
         if (isTouching(player, this)){
-            
+            player.health+=20;
+            newPowerUp();
+        }
+        else {
+            drawPowerUp();
         }
     }
 
     void newPowerUp(){
-        powerUp = new PVector(int(random(width/2)), int(random(height/2)));
+        powerUp = new PVector(int(random(width/2)), height-50);
         type = int(random(4));
     }
 

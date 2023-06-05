@@ -17,6 +17,7 @@ void setup() {
   background(255,255,255);
   background = loadImage("spaceBackground.jpg");
   size(1300, 800);
+  power = new PowerUp();
   arcade = createFont("ARCADECLASSIC.TTF",100);
   startScreen();
 }
@@ -28,13 +29,15 @@ void draw() {
     hb = new HealthBar(player);
     Greg = new Alien(width/2, height - 95, 50, 10, 4, 95, 95);
     Eric = new Alien(width/4, height - 95, 50, 10, 4, 95, 95);
-    Jack = new UFO(width/4, 0, 50, 10, 4, 150, 95);
+    Jack = new UFO(width/4, 0, 50, 10, 5, 150, 95);
     start = false;
     background(255,255,255);
   }
   if (start == false){
     background(background);
+
     reloadRate++;
+    power.update();
     // Update and display the player
     player.update();
     //Update and display the enemy

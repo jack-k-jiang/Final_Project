@@ -19,29 +19,24 @@ class Bullet {
 
   public void update(){
     if (firstTouch) {
-    pos.x += cos(angle/180*PI)*spd;
-    pos.y += sin(angle/180*PI)*spd;
-    fill(0,255,0);
-    rect(pos.x + 25, pos.y, bWidth, bHeight);
+      pos.x += cos(angle/180*PI)*spd;
+      pos.y += sin(angle/180*PI)*spd;
+      fill(0,255,0);
+      rect(pos.x + 25, pos.y, bWidth, bHeight);
     }
   }
 }
 
-class enemyBullet extends Bullet{
-  
-  
-  public enemyBullet(Enemy enemy){
-    pos = new PVector(enemy.x,enemy.y+enemy.eHeight);
-    bWidth = 10;
-    bHeight = 1000;
-    firstTouch = true;
+class UFOBullet extends Bullet{
+  public UFOBullet(UFO ufo){
+    pos = new PVector(ufo.x,ufo.y+ufo.eHeight);
+    bWidth = 50;
+    bHeight = height - ufo.eHeight;
   }
 
-  public void update(Enemy enemy){
-    pos.x += enemy.speed;
-    pos.y += 0;
-      image(enemy.laser,enemy.x+enemy.eWidth/2 - 22.5,enemy.y+enemy.eHeight,50,height - enemy.eHeight);
-    
-    //rect(pos.x+enemy.eWidth/2, pos.y, bWidth, bHeight);
-  }
+  public void update(UFO ufo){
+    pos.x += ufo.speed;
+    image(ufo.laser,ufo.x+ufo.eWidth/2 - 22.5,ufo.y+ufo.eHeight,50,height - ufo.eHeight);
+      
+      }
 }
