@@ -42,6 +42,7 @@ class Player {
   void update() {
     if (player.health <= 0) {
     }
+    else {
     // Update player position based on velocity
     if (x + vx < -1) {
       x = 0;
@@ -76,6 +77,7 @@ class Player {
     fill(255,0,0);
     rect(x, y, 50, 50);
     
+  }
   }
   
   void moveLeft() {
