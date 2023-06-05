@@ -1,4 +1,4 @@
-PowerUp power;
+PVector powerUp;
 PFont arcade;
 Player player;
 Weapon weapon;
