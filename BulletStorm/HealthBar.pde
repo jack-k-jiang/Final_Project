@@ -13,7 +13,8 @@ class HealthBar {
         if (hearts<i) {
           image(emptyHeart,60*(i-1), 0, 50, 50);
         }
-        else if (i == hearts && hearts%2==1) {
+        else if (i == hearts && player.health%10!=0
+        ) {
             image(halfHeart, 60*(i-1),0, 50, 50);
           }
         else {

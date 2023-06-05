@@ -3,6 +3,7 @@ PFont arcade;
 Player player;
 Weapon weapon;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 //Timer for functions
 Alien Greg;
 Alien Eric;
@@ -11,7 +12,7 @@ HealthBar hb;
 static int reloadRate = 0;
 boolean start = true;
 PImage background;
-Level curLvl = new Level();
+Level curLvl = new Level(1);
 
 void setup() {
   background(255,255,255);
@@ -27,9 +28,10 @@ void draw() {
   if (mousePressed && mouseButton == LEFT && start == true){
     player = new Player(width/2, height - 50, 50);
     hb = new HealthBar(player);
-    Greg = new Alien(width/2, height - 95, 50, 10, 4, 95, 95);
-    Eric = new Alien(width/4, height - 95, 50, 10, 4, 95, 95);
-    Jack = new UFO(width/4, 0, 50, 10, 5, 150, 95);
+    curLvl.runLevel();
+    //Greg = new Alien(width/2, height - 95, 50, 10, 4, 95, 95);
+    //Eric = new Alien(width/4, height - 95, 50, 10, 4, 95, 95);
+    //Jack = new UFO(width/4, 0, 50, 10, 5, 150, 95);
     start = false;
     background(255,255,255);
   }
@@ -41,9 +43,13 @@ void draw() {
     // Update and display the player
     player.update();
     //Update and display the enemy
+    for (int i = 0;i<enemies.size();i++) {
+      enemies.get(i).update();
+    }
     Greg.update();
     Eric.update();
     Jack.update();
+    //Update and display the healthbar
     hb.update();
     // Shoot weapon
     if (mousePressed && mouseButton == LEFT && reloadRate >= 10 && player != null){
