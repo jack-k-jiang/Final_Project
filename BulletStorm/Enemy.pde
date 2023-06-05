@@ -9,6 +9,7 @@ class Enemy {
   float eWidth;
   float eHeight;
   float attackRate;
+   ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
   PImage laser = loadImage("laser.png");
   Enemy(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
     this.x = x;
@@ -51,8 +52,6 @@ class Enemy {
   }
   return false;
   }
-  
-  
 }
 
 class Alien extends Enemy {
@@ -66,7 +65,6 @@ class Alien extends Enemy {
     if (health>0) {
       attackRate++;
       
-  
       if (player.x + player.size < x) {
         x -= speed;
       }
