@@ -33,7 +33,7 @@ class PowerUp{
      if (player.x + player.size >= powers.powerUp.x &&    // r1 right edge past r2 left
       player.x <= powers.powerUp.x + powers.pWidth &&    // r1 left edge past r2 right
       player.y + player.size >= powers.powerUp.y &&    // r1 top edge past r2 bottom
-      player.y <= power.powerUp.y + powers.pHeight) {    // r1 bottom edge past r2 top
+      player.y <= powers.powerUp.y + powers.pHeight) {    // r1 bottom edge past r2 top
       return true;
     }
     return false;
