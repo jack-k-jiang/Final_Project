@@ -1,5 +1,6 @@
 class PowerUp{
     PVector powerUp;
+    int timer = second();
     int pUpTimer = 0;
     int pDuration = 10;
     int pWidth = 50;
@@ -15,21 +16,57 @@ class PowerUp{
 
     void update(){
         if (isTouching(player, this)){
-            player.health+=20;
+          switch(type){
+          case 4:
+            if (player.health < 100 && player.health + 10 <= 100 ) 
+              player.health+=10;
+            else if (player.health == 95)
+              player.health+=5;
+            powerUp = null;
+            break;
+          case 1:
             newPowerUp();
+            break;
+          case 2:
+            newPowerUp();
+            break;
+          case 3:
+            newPowerUp();
+            break;
+        }
         }
         else {
             drawPowerUp();
+        }
+        if (timer == 20){
+           timer = 0;
+           newPowerUp();
         }
     }
 
     void newPowerUp(){
         powerUp = new PVector(int(random(width/2)), height-50);
-        type = int(random(4));
+        type = int(random(5));
     }
 
     void drawPowerUp(){
-        fill(255,255,0);
+        switch(type){
+          case 0:
+            fill(0,0,0);
+            break;
+          case 1:
+            fill(0,255,0);
+            break;
+          case 2:
+            fill(0,0,255);
+            break;
+          case 3:
+            fill(255,255,0);
+            break;
+          case 4:
+            fill(200,0,0);
+            break;
+        }
         rect(powerUp.x,powerUp.y,50,50);
     }
 

@@ -130,7 +130,7 @@ class Alien extends Enemy {
             if (attackRate >= 5 && (isTouching(bullet, player))) {
               attackRate = 0;
               player.health-=attack;
-              System.out.println("ufoooos");
+              System.out.println("player health: "+player.health);
             }
           
           }
