@@ -1,7 +1,6 @@
 class PowerUp{
     PVector powerUp;
     int timer = second();
-    int timer = second();
     int pUpTimer = 0;
     int pDuration = 600;
     int pInterval = 1500;
@@ -80,11 +79,6 @@ class PowerUp{
                 }
             }
         }
-        if (timer == int(random(100))){
-           timer = 0;
-           newPowerUp();
-        }
-        timer++;
     }
 
     void newPowerUp(){
