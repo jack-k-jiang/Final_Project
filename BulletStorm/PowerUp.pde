@@ -22,7 +22,6 @@ class PowerUp{
               player.health+=10;
             else if (player.health == 95)
               player.health+=5;
-            powerUp = null;
             break;
           case 1:
             newPowerUp();
@@ -38,10 +37,11 @@ class PowerUp{
         else {
             drawPowerUp();
         }
-        if (timer == 20){
+        if (timer == int(random(100))){
            timer = 0;
            newPowerUp();
         }
+        timer++;
     }
 
     void newPowerUp(){
