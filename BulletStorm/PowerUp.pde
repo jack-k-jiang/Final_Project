@@ -1,41 +1,84 @@
 class PowerUp{
     PVector powerUp;
     int timer = second();
+    int timer = second();
     int pUpTimer = 0;
-    int pDuration = 10;
+    int pDuration = 600;
+    int pInterval = 1500;
     int pWidth = 50;
     int pHeight = 50;
     int type = 0;
     boolean buffed = false;
+    boolean playerTouched = false;
     
     PowerUp(){
-       powerUp = new PVector(int(random(width/2)),height-50); 
+       powerUp = new PVector(int(random(width/2)), height - 50 - int(random(100))); 
        pWidth = 50;
        pHeight = 50;
     }
 
     void update(){
         if (isTouching(player, this)){
-          switch(type){
-          case 4:
-            if (player.health < 100 && player.health + 10 <= 100 ) 
-              player.health+=10;
-            else if (player.health == 95)
-              player.health+=5;
-            break;
-          case 1:
-            newPowerUp();
-            break;
-          case 2:
-            newPowerUp();
-            break;
-          case 3:
-            newPowerUp();
-            break;
-        }
+            switch(type){
+            case 0:
+                if (buffed == false) {
+                    player.jumpForce -= 5;
+                }
+                buffed = true;
+                playerTouched = true;
+                break;
+            case 1:
+                if (buffed == false) {
+                    player.speed += 5;
+                }
+                buffed=true;
+                playerTouched = true;
+                break;
+            case 2:
+                if (buffed == false) {
+                player.health += 10;
+                }
+                buffed=true;
+                playerTouched = true;
+                break;
+            case 3:
+                if (buffed == false) {
+                    rldRate -= 10;
+                }
+                buffed=true;
+                playerTouched = true;
+                break;
+            case 4:
+                if (buffed == false ) {
+                    player.health+=10;
+                    playerTouched = true;
+                }
+                else if (player.health == 95 && buffed == false){
+                player.health+=5;
+                playerTouched = true;
+                }
+            
+                break;
+            }
         }
         else {
-            drawPowerUp();
+            if (playerTouched == false){
+                drawPowerUp();
+            }
+            else {
+                if (playerTouched){
+                    pUpTimer++;
+                    if (pUpTimer == pDuration){
+                        player = new Player(player.x,player.y,player.health);
+                    }
+                    if (pUpTimer >= pInterval){
+                        pUpTimer = 0;
+                        playerTouched = false;
+                        newPowerUp();
+                        buffed = false;
+                    }
+                }
+            }
         }
         if (timer == int(random(100))){
            timer = 0;
@@ -45,7 +88,7 @@ class PowerUp{
     }
 
     void newPowerUp(){
-        powerUp = new PVector(int(random(width/2)), height-50);
+        powerUp = new PVector(int(random(width/2)), height - 50 - int(random(100)));
         type = int(random(5));
     }
 

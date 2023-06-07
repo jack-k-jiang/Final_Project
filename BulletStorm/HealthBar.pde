@@ -8,12 +8,15 @@ class HealthBar {
   }
   
   public void update() {
+    if (player.health>100) player.health = 100;
     hearts = int(player.health/10);
       for (int i = 1;i<=10;i++) {
         if (hearts<i) {
           image(emptyHeart,60*(i-1), 0, 50, 50);
         }
         else if (i == hearts && hearts%10!=0) {
+        else if (i == hearts && player.health%10!=0
+        ) {
             image(halfHeart, 60*(i-1),0, 50, 50);
           }
         else {

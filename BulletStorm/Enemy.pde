@@ -52,6 +52,9 @@ class Enemy {
   }
   return false;
   }
+  
+  void update() {
+  }
 }
 
 class Alien extends Enemy {
@@ -73,15 +76,12 @@ class Alien extends Enemy {
         x += speed;
       }
       
-      if (health>0) {
-        image(img, x,y, eWidth, eHeight);
-      }
-  
+      image(img, x,y, eWidth, eHeight);
       
       if (attackRate >= 30 && health > 0 && (isTouching(player, this))) { 
         attackRate = 0;
         player.health-=attack;
-        System.out.println("player health: "+player.health);
+        
       }
       
       for (int i = 0;i < bullets.size();i++) {
@@ -90,8 +90,9 @@ class Alien extends Enemy {
            health-=player.attack;
         }
       }
-      
-    
+    }
+    else {
+      enemies.remove(this);
     }
   }
   }
@@ -107,9 +108,9 @@ class Alien extends Enemy {
       }
 
       void update() {
-        attackRate++;
-        reloadRate++;
         if (health>0) {
+          attackRate++;
+          reloadRate++;
           if (x+eWidth+speed > width) {
             x = width-eWidth;
             speed = -1 * speed;
@@ -130,7 +131,6 @@ class Alien extends Enemy {
             if (attackRate >= 5 && (isTouching(bullet, player))) {
               attackRate = 0;
               player.health-=attack;
-              System.out.println("player health: "+player.health);
             }
           
           }
@@ -145,8 +145,10 @@ class Alien extends Enemy {
             }
           }
         }
-
-
+        else {
+          enemies.remove(this);
+          System.out.println(enemies.size());
+        }
       }
 
 
