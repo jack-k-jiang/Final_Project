@@ -22,16 +22,16 @@ class Player {
   float speed;
   
   
-  Player(float x, float y, float size) {
+  Player(float x, float y, float health) {
     this.x = x;
     this.y = y;
-    this.size = size;
+    this.health = health;
+    size = 50;
     vx = 0;
     vy = 0;
     isJumping = false;
     isFalling = false;
     speed = 5;
-    health = 100;
     attack = 10;
     timer = 5;
     jumpForce = -10; // Adjust this value to control the jump height
@@ -43,39 +43,39 @@ class Player {
     if (player.health <= 0) {
     }
     else {
-    // Update player position based on velocity
-    if (x + vx < -1) {
-      x = 0;
-    }
-    else if (x+size + vx > width) {
-      x = width-size;
-    }
-    else {
-    x += vx;
-    }
-    y += vy;
-    if (isJumping) {
-      timer--;
-    }
-    // Apply gravity
-    if (timer<1) {
-      vy += fallForce; // Adjust this value to control the fall speed
-    }
-    
-    // Check if player hits the ground
-    if (y >= groundLevel) {
-      timer = 5;
-      y = groundLevel;
-      vy = 0;
-      isJumping = false;
-      isFalling = false;
-    } else {
-      isFalling = true;
-    }
-    
-    // Display the player
-    fill(255,0,0);
-    rect(x, y, 50, 50);
+      // Update player position based on velocity
+      if (x + vx < -1) {
+        x = 0;
+      }
+      else if (x+size + vx > width) {
+        x = width-size;
+      }
+      else {
+      x += vx;
+      }
+      y += vy;
+      if (isJumping) {
+        timer--;
+      }
+      // Apply gravity
+      if (y < groundLevel || timer<1) {
+        vy += fallForce; // Adjust this value to control the fall speed
+      }
+      
+      // Check if player hits the ground
+      if (y >= groundLevel) {
+        timer = 5;
+        y = groundLevel;
+        vy = 0;
+        isJumping = false;
+        isFalling = false;
+      } else {
+        isFalling = true;
+      }
+      
+      // Display the player
+      fill(255,0,0);
+      rect(x, y, 50, 50);
     
   }
   }

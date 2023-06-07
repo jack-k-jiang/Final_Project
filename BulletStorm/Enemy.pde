@@ -81,6 +81,7 @@ class Alien extends Enemy {
       if (attackRate >= 30 && health > 0 && (isTouching(player, this))) { 
         attackRate = 0;
         player.health-=attack;
+        
       }
       
       for (int i = 0;i < bullets.size();i++) {

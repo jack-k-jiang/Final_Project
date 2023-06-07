@@ -2,7 +2,8 @@ class PowerUp{
     PVector powerUp;
     int timer = second();
     int pUpTimer = 0;
-    int pDuration = 10;
+    int pDuration = 600;
+    int pInterval = 1500;
     int pWidth = 50;
     int pHeight = 50;
     int type = 0;
@@ -41,17 +42,17 @@ class PowerUp{
                 break;
             case 3:
                 if (buffed == false) {
-                    rldRate += 50;
+                    rldRate -= 10;
                 }
                 buffed=true;
                 playerTouched = true;
                 break;
             case 4:
-                if (player.health < 100 && player.health + 10 <= 100 ) {
-                player.health+=10;
-                playerTouched = true;
+                if (buffed == false ) {
+                    player.health+=10;
+                    playerTouched = true;
                 }
-                else if (player.health == 95){
+                else if (player.health == 95 && buffed == false){
                 player.health+=5;
                 playerTouched = true;
                 }
@@ -66,10 +67,14 @@ class PowerUp{
             else {
                 if (playerTouched){
                     pUpTimer++;
-                    if (pUpTimer >= 180){
+                    if (pUpTimer == pDuration){
+                        player = new Player(player.x,player.y,player.health);
+                    }
+                    if (pUpTimer >= pInterval){
                         pUpTimer = 0;
                         playerTouched = false;
                         newPowerUp();
+                        buffed = false;
                     }
                 }
             }

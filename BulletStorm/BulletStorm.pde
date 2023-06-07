@@ -10,12 +10,12 @@ static int reloadRate = 0;
 boolean start = true;
 PImage background;
 Level curLvl = new Level(1);
-int rldRate = 10;
+int rldRate = 15;
 
 void setup() {
   background(255,255,255);
   background = loadImage("spaceBackground.jpg");
-  size(1300, 800);
+  size(1750, 800);
   power = new PowerUp();
   arcade = createFont("ARCADECLASSIC.TTF",100);
   startScreen();
@@ -23,7 +23,7 @@ void setup() {
 
 void draw() {
   if (mousePressed && mouseButton == LEFT && start == true){
-    player = new Player(width/2, height - 50, 50);
+    player = new Player(width/2, height - 50, 100);
     hb = new HealthBar(player);
     curLvl.runLevel();
     start = false;
@@ -33,9 +33,10 @@ void draw() {
     background(background);
 
     reloadRate++;
-    power.update();
+    
     // Update and display the player
     player.update();
+    power.update();
     if (player.health <= 0){
       start = true;
       endScreen();
@@ -51,7 +52,13 @@ void draw() {
     for (int i = 0;i<enemies.size();i++) {
       enemies.get(i).update();
     }
-
+    if (player.health<=0) {
+          start = true;
+          endScreen();
+          curLvl = new Level(1);
+          enemies = new ArrayList<Enemy>();
+          return;
+    }
     //Update and display the healthbar
     hb.update();
     // Shoot weapon
