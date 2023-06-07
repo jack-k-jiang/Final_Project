@@ -10,7 +10,7 @@ class Bullet {
   public Bullet(){
     pos = new PVector(player.x, player.y);
     mouse = new PVector(mouseX, mouseY);
-    spd = 5;
+    spd = 10;
     angle = atan2(mouse.y - pos.y, mouse.x - pos.x) / PI * 180;
     bWidth = 10;
     bHeight = 10;

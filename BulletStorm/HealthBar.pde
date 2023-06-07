@@ -8,6 +8,7 @@ class HealthBar {
   }
   
   public void update() {
+    if (player.health>100) player.health = 100;
     hearts = int(player.health/10);
       for (int i = 1;i<=10;i++) {
         if (hearts<i) {

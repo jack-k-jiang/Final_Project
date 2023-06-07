@@ -5,33 +5,27 @@ Weapon weapon;
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 //Timer for functions
-Alien Greg;
-Alien Eric;
-UFO Jack;
 HealthBar hb;
 static int reloadRate = 0;
 boolean start = true;
 PImage background;
 Level curLvl = new Level(1);
+int rldRate = 15;
 
 void setup() {
   background(255,255,255);
   background = loadImage("spaceBackground.jpg");
-  size(1300, 800);
+  size(1750, 800);
   power = new PowerUp();
   arcade = createFont("ARCADECLASSIC.TTF",100);
   startScreen();
 }
 
 void draw() {
-  if (curLvl.lvl == 1) {
   if (mousePressed && mouseButton == LEFT && start == true){
-    player = new Player(width/2, height - 50, 50);
+    player = new Player(width/2, height - 50, 100);
     hb = new HealthBar(player);
     curLvl.runLevel();
-    //Greg = new Alien(width/2, height - 95, 50, 10, 4, 95, 95);
-    //Eric = new Alien(width/4, height - 95, 50, 10, 4, 95, 95);
-    //Jack = new UFO(width/4, 0, 50, 10, 5, 150, 95);
     start = false;
     background(255,255,255);
   }
@@ -39,20 +33,36 @@ void draw() {
     background(background);
 
     reloadRate++;
-    power.update();
+    
     // Update and display the player
     player.update();
+    power.update();
+    if (player.health <= 0){
+      start = true;
+      endScreen();
+      curLvl = new Level(1);
+      enemies = new ArrayList<Enemy>();
+      return;
+    }
     //Update and display the enemy
+    if (enemies.size()==0) {
+      curLvl = new Level(curLvl.lvl+1);
+      curLvl.runLevel();
+    }
     for (int i = 0;i<enemies.size();i++) {
       enemies.get(i).update();
     }
-    Greg.update();
-    Eric.update();
-    Jack.update();
+    if (player.health<=0) {
+          start = true;
+          endScreen();
+          curLvl = new Level(1);
+          enemies = new ArrayList<Enemy>();
+          return;
+    }
     //Update and display the healthbar
     hb.update();
     // Shoot weapon
-    if (mousePressed && mouseButton == LEFT && reloadRate >= 10 && player != null){
+    if (mousePressed && mouseButton == LEFT && reloadRate >= rldRate && player != null){
         reloadRate = 0;
         bullets.add(new Bullet());
     }
@@ -63,12 +73,9 @@ void draw() {
       bullets.remove(i);
       }
     }
-    if (player.health <= 0){
-      endScreen();
-      start = true;
-    }
+    
   }
-  }
+  
 }
 
 void keyPressed() {
