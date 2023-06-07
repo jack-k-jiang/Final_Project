@@ -66,29 +66,35 @@ class Alien extends Enemy {
   
   void update() {
     if (health>0) {
-      attackRate++;
-      
-      if (player.x + player.size < x) {
-        x -= speed;
-      }
-      
-      else if (player.x > x + eWidth) {
-        x += speed;
-      }
-      
-      image(img, x,y, eWidth, eHeight);
-      
-      if (attackRate >= 30 && health > 0 && (isTouching(player, this))) { 
-        attackRate = 0;
-        player.health-=attack;
+      if (y==height-95) {
+        attackRate++;
         
-      }
-      
-      for (int i = 0;i < bullets.size();i++) {
-        Bullet bullet = bullets.get(i);
-        if (bullet.firstTouch && isTouching(bullet, this)) {
-           health-=player.attack;
+        if (player.x + player.size < x) {
+          x -= speed;
         }
+        
+        else if (player.x > x + eWidth) {
+          x += speed;
+        }
+        
+        image(img, x,y, eWidth, eHeight);
+        
+        if (attackRate >= 30 && health > 0 && (isTouching(player, this))) { 
+          attackRate = 0;
+          player.health-=attack;
+          
+        }
+        
+        for (int i = 0;i < bullets.size();i++) {
+          Bullet bullet = bullets.get(i);
+          if (bullet.firstTouch && isTouching(bullet, this)) {
+             health-=player.attack;
+          }
+        }
+      }
+      else {
+        y+=50;
+        image(img,x,y,eWidth,eHeight); 
       }
     }
     else {

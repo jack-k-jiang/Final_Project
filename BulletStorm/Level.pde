@@ -10,7 +10,7 @@ class Level {
   
   void runLevel() {
      for (int i = 0;i<numAliens;i++) {
-       Alien alien = new Alien(random(0,width-94), height - 95, 50+5*int(random(lvl-1,lvl+1)), 10+5*int(random(lvl-1,lvl+1)), 4+int(random(lvl-1,lvl+1)), 95, 95);
+       Alien alien = new Alien(random(0,width-94), height - 195, 50+5*int(random(lvl-1,lvl+1)), 10+5*int(random(lvl-1,lvl+1)), 4+int(random(lvl-1,lvl+1)), 95, 95);
        enemies.add(alien);
      }
      
