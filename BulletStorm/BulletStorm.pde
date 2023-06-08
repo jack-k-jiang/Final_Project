@@ -1,4 +1,10 @@
+//Fonts + Images
 PFont arcade;
+PImage background;
+PImage platform1;
+PImage platform2;
+PImage platform3;
+PImage platform4;
 
 PowerUp power;
 Player player;
@@ -13,7 +19,6 @@ ArrayList<Platform> platforms = new ArrayList<Platform>();
 HealthBar hb;
 int reloadRate = 0;
 boolean start = true;
-PImage background;
 Level curLvl = new Level(1);
 int rldRate = 15;
 int lvlTimer = 0;
@@ -23,14 +28,18 @@ boolean newLevel = false;
 void setup() {
   background(255,255,255);
   background = loadImage("spaceBackground.jpg");
+  platform1 = loadImage("platformTwo.png");
+  platform2 = loadImage("platformOne.png");
+  platform3 = loadImage("platformThree.png");
+  platform4 = loadImage("platformTwo.png");
   size(1750, 800);
   power = new PowerUp();
   arcade = createFont("ARCADECLASSIC.TTF",150);
   startScreen();
-  platforms.add(new Platform(width/2,height-150,150,50));
-  platforms.add(new Platform(width/2 - 75,height-250,150,50));
-  platforms.add(new Platform(width/2 + 75,height-250,150,50));
-  platforms.add(new Platform(width/2,height-350,150,50));
+  platforms.add(new Platform(platform1, width/2,height-150,150,50));
+  platforms.add(new Platform(platform2,width/2 - 75,height-250,150,50));
+  platforms.add(new Platform(platform3,width/2 + 75,height-250,150,50));
+  platforms.add(new Platform(platform4,width/2,height-350,150,50));
 }
 
 void draw() {
