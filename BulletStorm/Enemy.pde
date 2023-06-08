@@ -9,6 +9,8 @@ class Enemy {
   float eWidth;
   float eHeight;
   float attackRate;
+  float fallTimer = 12;
+   ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
   PImage laser = loadImage("laser.png");
   Enemy(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
     this.x = x;
@@ -21,6 +23,15 @@ class Enemy {
    attackRate = 30;
   }
   
+  boolean isTouching(UFOBullet uBullet, Player player) {
+    if (player.x + player.size >= uBullet.pos.x &&    // r1 right edge past r2 left
+      player.x <= uBullet.pos.x + uBullet.bWidth &&    // r1 left edge past r2 right
+      player.y + player.size >= uBullet.pos.y &&    // r1 top edge past r2 bottom
+      player.y <= uBullet.pos.y + uBullet.bHeight) {    // r1 bottom edge past r2 top
+        return true;
+    }
+    return false;
+  }
   boolean isTouching(Bullet bullet, Enemy enemy) {
      if (bullet.pos.x + bullet.bWidth >= enemy.x &&    // r1 right edge past r2 left
       bullet.pos.x <= enemy.x + enemy.eWidth &&    // r1 left edge past r2 right
@@ -43,7 +54,8 @@ class Enemy {
   return false;
   }
   
-  
+  void update() {
+  }
 }
 
 class Alien extends Enemy {
@@ -55,52 +67,60 @@ class Alien extends Enemy {
   
   void update() {
     if (health>0) {
-    attackRate++;
-    
-
-    if (player.x + player.size < x) {
-      x -= speed;
-    }
-    
-    else if (player.x > x + eWidth) {
-      x += speed;
-    }
-    
-    if (health>0) {
-      image(img, x,y, eWidth, eHeight);
-    }
-
-    
-    if (attackRate >= 30 && health > 0 && (isTouching(player, this))) { 
-      attackRate = 0;
-      player.health-=attack;
-      System.out.println("player health: "+player.health);
-    }
-    
-    for (int i = 0;i < bullets.size();i++) {
-      Bullet bullet = bullets.get(i);
-      if (bullet.firstTouch && isTouching(bullet, this)) {
-         health-=player.attack;
+      if (y==height-95) {
+        attackRate++;
+        
+        if (player.x + player.size < x) {
+          x -= speed;
+        }
+        
+        else if (player.x > x + eWidth) {
+          x += speed;
+        }
+        
+        image(img, x,y, eWidth, eHeight);
+        
+        if (attackRate >= 30 && health > 0 && (isTouching(player, this))) { 
+          attackRate = 0;
+          player.health-=attack;
+          
+        }
+        
+        for (int i = 0;i < bullets.size();i++) {
+          Bullet bullet = bullets.get(i);
+          if (bullet.firstTouch && isTouching(bullet, this)) {
+             health-=player.attack;
+          }
+        }
+      }
+      else {
+        fallTimer++;
+        if (fallTimer>=12) {
+          y+=5;
+          image(img,x,y,eWidth,eHeight); 
+        }
       }
     }
-    
-  
+    else {
+      enemies.remove(this);
     }
   }
   }
 
   class UFO extends Enemy {
-      float reloadRate = 180;
-      float displayRate = 10;
-    PImage img = loadImage("ufo.png");
-    PImage laser = loadImage("laser.png");
+      float reloadRate = 0;
+      float displayRate =15;
+      float attackRate = 5;
+      PImage img = loadImage("ufo.png");
+      PImage laser = loadImage("laser.png");
       public UFO(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
           super(x, y, h, a, s, eWidth, eHeight);
       }
 
       void update() {
-        reloadRate++;
         if (health>0) {
+          attackRate++;
+          reloadRate++;
           if (x+eWidth+speed > width) {
             x = width-eWidth;
             speed = -1 * speed;
@@ -114,18 +134,31 @@ class Alien extends Enemy {
           image(img, x, y, eWidth, eHeight);
           x+=speed;
           }
-        if (reloadRate >= 180 && displayRate>0) {
-          displayRate--;
-          enemyBullet bullet = new enemyBullet(this);
-          bullet.update(this);
+          if (reloadRate >= 90 && displayRate>0) {
+            displayRate--;
+            UFOBullet bullet = new UFOBullet(this);
+            bullet.update(this);
+            if (attackRate >= 5 && (isTouching(bullet, player))) {
+              attackRate = 0;
+              player.health-=attack;
+            }
+          
+          }
+          if (displayRate <= 0) {
+            displayRate = 15;
+            reloadRate = 0;
+          }
+          for (int i = 0;i < bullets.size();i++) {
+            Bullet bullet = bullets.get(i);
+            if (bullet.firstTouch && isTouching(bullet, this)) {
+               health-=player.attack;
+            }
+          }
         }
-        if (displayRate <= 0) {
-          displayRate = 10;
-          reloadRate = 0;
+        else {
+          enemies.remove(this);
+          System.out.println(enemies.size());
         }
-        }
-
-
       }
 
 
