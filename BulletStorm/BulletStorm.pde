@@ -11,6 +11,8 @@ boolean start = true;
 PImage background;
 Level curLvl = new Level(1);
 int rldRate = 15;
+int lvlTimer = 0;
+boolean newLevel = false;
 
 void setup() {
   background(255,255,255);
@@ -29,6 +31,7 @@ void draw() {
     start = false;
     background(255,255,255);
   }
+  //while (lvlTimer < 180)
   if (start == false){
     background(background);
 
@@ -48,6 +51,19 @@ void draw() {
     if (enemies.size()==0) {
       curLvl = new Level(curLvl.lvl+1);
       curLvl.runLevel();
+      newLevel = true;
+    }
+    if (newLevel == true && lvlTimer < 180){
+      fill(255,255,255);
+      textAlign(CENTER);
+      text("LEVEL " + curLvl.lvl, width/2, height/2);
+      strokeWeight(1);
+      lvlTimer++;
+      start = true;
+    }
+    else if (lvlTimer >= 180){
+      newLevel = false;
+      lvlTimer = 0;
     }
     for (int i = 0;i<enemies.size();i++) {
       enemies.get(i).update();
