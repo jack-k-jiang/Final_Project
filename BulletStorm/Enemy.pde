@@ -9,6 +9,7 @@ class Enemy {
   float eWidth;
   float eHeight;
   float attackRate;
+  float fallTimer = 12;
    ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
   PImage laser = loadImage("laser.png");
   Enemy(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
@@ -93,8 +94,11 @@ class Alien extends Enemy {
         }
       }
       else {
-        y+=50;
-        image(img,x,y,eWidth,eHeight); 
+        fallTimer++;
+        if (fallTimer>=12) {
+          y+=5;
+          image(img,x,y,eWidth,eHeight); 
+        }
       }
     }
     else {
@@ -104,7 +108,7 @@ class Alien extends Enemy {
   }
 
   class UFO extends Enemy {
-      float reloadRate = 90;
+      float reloadRate = 0;
       float displayRate =15;
       float attackRate = 5;
       PImage img = loadImage("ufo.png");

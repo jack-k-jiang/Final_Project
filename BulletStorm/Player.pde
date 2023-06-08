@@ -20,21 +20,23 @@ class Player {
   float health;
   float attack;
   float speed;
+
+  boolean isPowered = false;
   
   
-  Player(float x, float y, float health) {
+  Player(float x, float y, float health, float attack, float speed, float jumpForce) {
     this.x = x;
     this.y = y;
     this.health = health;
+    this.attack = attack;
+    this.speed = speed;
+    this.jumpForce = jumpForce; // Adjust this value to control the jump height
     size = 50;
     vx = 0;
     vy = 0;
     isJumping = false;
     isFalling = false;
-    speed = 5;
-    attack = 10;
     timer = 5;
-    jumpForce = -10; // Adjust this value to control the jump height
     fallForce = 0.5; // Adjust this value to control the fall speed
     groundLevel = height - size;
   }

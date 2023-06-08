@@ -1,4 +1,10 @@
 class PowerUp{
+    PImage strength = loadImage("strength.png");
+    PImage speed = loadImage("speed.png");
+    PImage health = loadImage("health.png");
+    PImage reload = loadImage("reload.png");
+    PImage jump = loadImage("jump.png");
+
     PVector powerUp;
     int timer = second();
     int pUpTimer = 0;
@@ -6,8 +12,7 @@ class PowerUp{
     int pInterval = 1500;
     int pWidth = 50;
     int pHeight = 50;
-    int type = 0;
-    boolean buffed = false;
+    int type = int(random(5));
     boolean playerTouched = false;
     
     PowerUp(){
@@ -20,43 +25,42 @@ class PowerUp{
         if (isTouching(player, this)){
             switch(type){
             case 0:
-                if (buffed == false) {
+                if (player.isPowered == false) {
                     player.jumpForce -= 5;
                 }
-                buffed = true;
+                player.isPowered = true;
                 playerTouched = true;
                 break;
             case 1:
-                if (buffed == false) {
+                if (player.isPowered == false) {
                     player.speed += 5;
                 }
-                buffed=true;
+                player.isPowered=true;
                 playerTouched = true;
                 break;
             case 2:
-                if (buffed == false) {
-                player.health += 10;
+                if (player.isPowered == false) {
+                    player.attack += 10;
                 }
-                buffed=true;
+                player.isPowered=true;
                 playerTouched = true;
                 break;
             case 3:
-                if (buffed == false) {
-                    rldRate -= 10;
+                if (player.isPowered == false) {
+                    rldRate -= 7.5;
                 }
-                buffed=true;
+                player.isPowered=true;
                 playerTouched = true;
                 break;
             case 4:
-                if (buffed == false ) {
+                if (player.isPowered == false && player.health + 10 <= 100) {
                     player.health+=10;
-                    playerTouched = true;
                 }
-                else if (player.health == 95 && buffed == false){
-                player.health+=5;
+                else if (player.health == 95 && player.isPowered == false){
+                    player.health+=5;
+                }
+                player.isPowered = true;
                 playerTouched = true;
-                }
-            
                 break;
             }
         }
@@ -68,13 +72,26 @@ class PowerUp{
                 if (playerTouched){
                     pUpTimer++;
                     if (pUpTimer == pDuration){
-                        player = new Player(player.x,player.y,player.health);
+                        switch(type){
+                            case 0:
+                                player.jumpForce += 5;
+                                break;
+                            case 1:
+                                player.speed-=5;
+                                break;
+                            case 2:
+                                player.attack -= 10;
+                                break;
+                            case 3:
+                                rldRate += 7.5;
+                                break;
+                        }
                     }
                     if (pUpTimer >= pInterval){
                         pUpTimer = 0;
                         playerTouched = false;
                         newPowerUp();
-                        buffed = false;
+                        player.isPowered = false;
                     }
                 }
             }
@@ -89,22 +106,21 @@ class PowerUp{
     void drawPowerUp(){
         switch(type){
           case 0:
-            fill(0,0,0);
+            image(jump,powerUp.x,powerUp.y,50,50);
             break;
           case 1:
-            fill(0,255,0);
+            image(speed,powerUp.x,powerUp.y,50,50);
             break;
           case 2:
-            fill(0,0,255);
+            image(strength,powerUp.x,powerUp.y,50,50);
             break;
           case 3:
-            fill(255,255,0);
+            image(reload,powerUp.x,powerUp.y,50,50);
             break;
           case 4:
-            fill(200,0,0);
+            image(health,powerUp.x,powerUp.y,50,50);
             break;
         }
-        rect(powerUp.x,powerUp.y,50,50);
     }
 
     boolean isTouching(Player player, PowerUp powers) {
