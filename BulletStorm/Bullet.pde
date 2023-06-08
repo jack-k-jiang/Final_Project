@@ -37,6 +37,5 @@ class UFOBullet extends Bullet{
   public void update(UFO ufo){
     pos.x += ufo.speed;
     image(ufo.laser,ufo.x+ufo.eWidth/2 - 22.5,ufo.y+ufo.eHeight,50,height - ufo.eHeight);
-      
-      }
+  }
 }

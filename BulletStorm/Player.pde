@@ -56,8 +56,12 @@ class Player {
     else {
       //Checking if it's at borders
       for (int i = 0;i<platforms.size();i++) {
-        if (isTouching(this,platforms.get(i))) {
-
+        Platform platform = platforms.get(i);
+        if (isTouching(this,platform)) {
+          if (platform.y+platform.height==player.y) {}
+          if (platform.x+platform.width==player.x) {
+          }
+          
         }
       }
       if (x + vx < -1) {

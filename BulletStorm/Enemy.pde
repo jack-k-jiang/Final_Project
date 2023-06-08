@@ -10,7 +10,7 @@ class Enemy {
   float eHeight;
   float attackRate;
   float fallTimer = 12;
-   ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
+  ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>();
   PImage laser = loadImage("laser.png");
   Enemy(float x, float y, int h, int a, int s, int eWidth, int eHeight) {
     this.x = x;
