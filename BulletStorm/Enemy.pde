@@ -48,12 +48,13 @@ class Enemy {
       player.x <= enemy.x + enemy.eWidth &&    // r1 left edge past r2 right
       player.y + player.size >= enemy.y &&    // r1 top edge past r2 bottom
       player.y <= enemy.y + enemy.eHeight) {    // r1 bottom edge past r2 top
-
         return true;
   }
   return false;
   }
   
+  
+
   void update() {
   }
 }

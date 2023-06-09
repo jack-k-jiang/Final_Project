@@ -21,12 +21,13 @@ class Player {
   float attack;
   float speed;
 
+  boolean touchingPlatform = false;
   boolean isPowered = false;
   
   boolean isTouching(Player player, Platform platform) {
      if (player.x + player.size >= platform.x &&    // r1 right edge past r2 left
       player.x <= platform.x + platform.width &&    // r1 left edge past r2 right
-      player.y + player.size >= platform.y &&    // r1 top edge past r2 bottom
+      player.y + player.size >= platform.y+45 &&    // r1 top edge past r2 bottom
       player.y <= platform.y + platform.height) {    // r1 bottom edge past r2 top
         return true;
   }
@@ -54,16 +55,8 @@ class Player {
     if (player.health <= 0) {
     }
     else {
+      boolean touchingPlatform = false;
       //Checking if it's at borders
-      for (int i = 0;i<platforms.size();i++) {
-        Platform platform = platforms.get(i);
-        if (isTouching(this,platform)) {
-          if (platform.y+platform.height==player.y) {}
-          if (platform.x+platform.width==player.x) {
-          }
-          
-        }
-      }
       if (x + vx < -1) {
         x = 0;
       }
@@ -74,12 +67,43 @@ class Player {
       x += vx;
       }
       y += vy;
-
+      
+      for (int i = 0; i < platforms.size(); i++) {
+        Platform platform = platforms.get(i);
+      if (isTouching(this, platform)) {
+        // Colliding with a platform
+        if (vy >= 0 && y + vy + player.size >= platform.y) {
+          // Collision from above
+          timer = 5;
+          y = platform.y-player.size+45;
+          vy = 0;
+          isJumping = false;
+          isFalling = false;
+          touchingPlatform = true;
+        }  else if (vy < 0 &&  y + vy <= platform.y + platform.height) {
+          // Collision from below
+          vy = 0;
+          timer = 0;
+          y = platform.y + platform.height+.01;
+          isJumping = false;
+          isFalling = true;
+          touchingPlatform = false;
+        }
+        else if (vx > 0 && x + vx <= platform.x + platform.width && x + vx + size >= platform.x) {
+          // Collision from the left
+          // x = platform.x - size;
+        } else if (vx < 0 && x + vx + size >= platform.x && x + vx < platform.x + platform.width) {
+          // Collision from the right
+          // x = platform.x + platform.width;
+        }
+      }
+    }
+      
       if (isJumping) {
         timer--;
       }
       // Apply gravity
-      if (y < groundLevel || timer<1) {
+      if (!touchingPlatform && (y < groundLevel || timer<1)) {
         vy += fallForce; // Adjust this value to control the fall speed
       }
       
@@ -91,7 +115,8 @@ class Player {
         isJumping = false;
         isFalling = false;
       } else {
-        isFalling = true;
+        if (!touchingPlatform) {isFalling = true;}
+        
       }
       
       // Display the player
@@ -119,6 +144,6 @@ class Player {
     if (!isJumping && !isFalling) {
       vy = jumpForce;
       isJumping = true;
-    }
+          }
   }
 }

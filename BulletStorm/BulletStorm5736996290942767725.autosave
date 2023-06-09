@@ -6,8 +6,7 @@ PImage platform2;
 PImage platform3;
 PImage platform4;
 PImage[] boss = new PImage[20]; 
-PImage horLaser;
-PImage verLaser;
+
 
 
 PowerUp power;
@@ -33,8 +32,8 @@ Boss bossB;
 boolean victory = false;
 
 void setup() {
-  horLaser  = loadImage("horLaser.png");
-  verLaser  = loadImage("verLaser.png");
+  PImage horLaser  = loadImage("horLaser.png");
+  PImage verLaser  = loadImage("verLaser.png");
   smooth();
   boss[0] = loadImage("boss0.gif");
   boss[1] = loadImage("boss1.gif");
@@ -188,13 +187,10 @@ void startScreen(){
   textAlign(CENTER);
   textSize(150);
   text("Bulletstorm", width/2, height/2 - 150);
-  fill(255,0,0);
   text("PLAY", width/2, height/2);
-  fill(255,255,255);
   textSize(50);
   text("W,A,S,D to move", width/2, height/2 + 100);
   text("LEFT CLICK TO SHOOT", width/2, height/2 + 200);
-  text("KILL ALL ENEMIES TO WIN", width/2, height/2 + 250);
   strokeWeight(1);
 }
 

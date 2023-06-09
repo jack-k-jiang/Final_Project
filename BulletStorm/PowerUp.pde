@@ -106,19 +106,19 @@ class PowerUp{
     void drawPowerUp(){
         switch(type){
           case 0:
-            image(jump,powerUp.x,powerUp.y,50,50);
+            image(jump,powerUp.x,powerUp.y,75,75);
             break;
           case 1:
-            image(speed,powerUp.x,powerUp.y,50,50);
+            image(speed,powerUp.x,powerUp.y,75,75);
             break;
           case 2:
-            image(strength,powerUp.x,powerUp.y,50,50);
+            image(strength,powerUp.x,powerUp.y,75,75);
             break;
           case 3:
-            image(reload,powerUp.x,powerUp.y,50,50);
+            image(reload,powerUp.x,powerUp.y,75,75);
             break;
           case 4:
-            image(health,powerUp.x,powerUp.y,50,50);
+            image(health,powerUp.x,powerUp.y,75,75);
             break;
         }
     }
