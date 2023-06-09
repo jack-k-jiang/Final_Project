@@ -23,6 +23,15 @@ class Player {
 
   boolean isPowered = false;
   
+  boolean isTouching(Player player, Platform platform) {
+     if (player.x + player.size >= platform.x &&    // r1 right edge past r2 left
+      player.x <= platform.x + platform.width &&    // r1 left edge past r2 right
+      player.y + player.size >= platform.y &&    // r1 top edge past r2 bottom
+      player.y <= platform.y + platform.height) {    // r1 bottom edge past r2 top
+        return true;
+  }
+  return false;
+  }
   
   Player(float x, float y, float health, float attack, float speed, float jumpForce) {
     this.x = x;
@@ -45,7 +54,16 @@ class Player {
     if (player.health <= 0) {
     }
     else {
-      // Update player position based on velocity
+      //Checking if it's at borders
+      for (int i = 0;i<platforms.size();i++) {
+        Platform platform = platforms.get(i);
+        if (isTouching(this,platform)) {
+          if (platform.y+platform.height==player.y) {}
+          if (platform.x+platform.width==player.x) {
+          }
+          
+        }
+      }
       if (x + vx < -1) {
         x = 0;
       }
@@ -56,6 +74,7 @@ class Player {
       x += vx;
       }
       y += vy;
+
       if (isJumping) {
         timer--;
       }
